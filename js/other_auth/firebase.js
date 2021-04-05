@@ -1,3 +1,5 @@
+// https://www.youtube.com/watch?v=iKlWaUszxB4&t=215s
+
 var firebaseConfig = envFirebaseConfig; //envFirebaseConfigは別ディレクトリにあるFirebase用のIDなどの情報の変数
 
 // Initialize Firebase
@@ -6,11 +8,14 @@ firebase.initializeApp(firebaseConfig);
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
-
+        // ログイン処理に必要な塊を表示
         document.getElementById("user_div").style.display = "block";
+        // ログアウト等のログイン後に必要な塊を非表示
         document.getElementById("login_div").style.display = "none";
 
         var user = firebase.auth().currentUser;
+        
+        console.dir(user);
 
         if (user != null) {
             var email_id = user.email;
@@ -32,11 +37,12 @@ function login() {
     firebase
         .auth()
         .signInWithEmailAndPassword(userEmail, userPass)
+        .then(console.log(userEmail, userPass))
         .catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-
+            console.dir(error);
             window.alert("Error : " + errorMessage);
             // ...
         });
@@ -49,17 +55,13 @@ function logout() {
 document
     .getElementById("password_field")
     .addEventListener("keydown", function (e) {
-        console.log(e.metaKey);
-        console.dir(e);
-
-        // console.log(`${userEmail} ${userPass}`);
+        // console.log(e.metaKey);
+        // console.dir(e);
 
         const downKeyCode1 = e.key; //13 = Enter Key
 
-        if (downKeyCode1 == "Enter") {
-            console.log("true!!!!!!!!!");
-        }
-        // console.log(metaKey);
+        if (downKeyCode1 == "Enter") console.log("true!!!!!!!!!");
+
         // cmdの際はmetaKey == true になる
         if (event.metaKey) {
             if (
