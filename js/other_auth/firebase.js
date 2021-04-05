@@ -1,57 +1,74 @@
-// Firebase Auth をウェブで始めよう！ - Firecasts
-// https://www.youtube.com/watch?v=-OKrloDzGpU
+var firebaseConfig = envFirebaseConfig; //envFirebaseConfigは別ディレクトリにあるFirebase用のIDなどの情報の変数
 
-(function () {
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    var firebaseConfig = envFirebaseConfig; //envFirebaseConfigは別ディレクトリにあるFirebase用のIDなどの情報の変数
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    // console.log(firebaseConfig);
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        // User is signed in.
 
-    const txtEmail = document.getElementById("txtEmail");
-    const txtPassword = document.getElementById("txtPassword");
-    const btnLogin = document.getElementById("btnLogin");
-    const btnSignUp = document.getElementById("btnSignUp");
-    const btnLogOut = document.getElementById("btnLogOut");
+        document.getElementById("user_div").style.display = "block";
+        document.getElementById("login_div").style.display = "none";
 
-    //LogIn event
-    btnLogin.addEventListener("click", (e) => {
-        const email = txtEmail.value;
-        const pass = txtPassword.value;
-        const auth = firebase.auth();
+        var user = firebase.auth().currentUser;
 
-        //Sign In
-        //https: firebase.google.com/docs/auth/web/password-auth?hl=ja
-        const promise = auth.signInWithEmailAndPassword(email, pass);
-        console.log(promise);
-        promise.catch((e) => console.log(e.message));
-    });
+        if (user != null) {
+            var email_id = user.email;
+            document.getElementById("user_para").innerHTML =
+                "Welcome User : " + email_id;
+        }
+    } else {
+        // No user is signed in.
 
-    //Add signup event
-    btnSignUp.addEventListener("click", (e) => {
-        const email = txtEmail.value;
-        const pass = txtPassword.value;
-        const auth = firebase.auth();
+        document.getElementById("user_div").style.display = "none";
+        document.getElementById("login_div").style.display = "block";
+    }
+});
 
-        //Sign In
-        //https: firebase.google.com/docs/auth/web/password-auth?hl=ja
-        const promise = auth.createUserWithEmailAndPassword(email, pass);
-        promise.catch((e) => console.log(e.message));
-    });
+function login() {
+    var userEmail = document.getElementById("email_field").value;
+    var userPass = document.getElementById("password_field").value;
 
-    btnLogOut.addEventListener("click", (e) => {
-        firebase.auth().signOut();
-    });
+    firebase
+        .auth()
+        .signInWithEmailAndPassword(userEmail, userPass)
+        .catch(function (error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
 
-    //Add a realtime listener
-    firebase.auth().onAuthStateChanged((firebaseUser) => {
-        if (firebaseUser) {
-            console.log(firebaseUser);
-            btnLogOut.classList.remove("hide");
-        } else {
-            console.log("Not Logged In");
-            btnLogOut.classList.add("hide");
+            window.alert("Error : " + errorMessage);
+            // ...
+        });
+}
+
+function logout() {
+    firebase.auth().signOut();
+}
+
+document
+    .getElementById("password_field")
+    .addEventListener("keydown", function (e) {
+        console.log(e.metaKey);
+        console.dir(e);
+
+        // console.log(`${userEmail} ${userPass}`);
+
+        const downKeyCode1 = e.key; //13 = Enter Key
+
+        if (downKeyCode1 == "Enter") {
+            console.log("true!!!!!!!!!");
+        }
+        // console.log(metaKey);
+        // cmdの際はmetaKey == true になる
+        if (event.metaKey) {
+            if (
+                downKeyCode1 == "Enter" &&
+                document.getElementById("password_field").value != ""
+            ) {
+                console.log("Pressed Double Key with command key.");
+                
+                login();
+            }
         }
     });
-})();
