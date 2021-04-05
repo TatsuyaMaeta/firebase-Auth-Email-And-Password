@@ -14,18 +14,18 @@ VSCodeからの[ブラウザで開く]では表示できない。
 .  
 │   
 ├─ env  
-│  └── env_firebase_Auth
+│  └── env_firebase_Auth  
 │      └── env.js  
-└── firebase_Auth 
+└── firebase_Auth  
      ├── css  
      │   ├── reset.css  
      │   └── style.css  
      ├── images   
      ├── index.html  
      ├── js  
-     │   ├── firebase.js  
+     │   ├── firebase.js    
      │   └── app.js  
-     └── readme.md
+     └── readme.md  
 
 README.md の書き方  
 https://codechord.com/2012/01/readme-markdown/
