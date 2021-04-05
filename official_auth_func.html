@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>test</title>
+
+        <link rel="stylesheet" href="./css/reset.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="./css/style.css" />
+    </head>
+    <body>
+        <br /><br />
+        <div class="container">
+            <input type="email" placeholder="Email" id="txtEmail" />
+            <br />
+            <input
+                type="password"
+                name=""
+                id="txtPassword"
+                placeholder="Password"
+            />
+            <br /><br />
+            <button id="btnLogin" class="btn btn-primary">Log In</button>
+
+            <button id="btnSignUp" class="btn btn-secondary">Sign Up</button>
+
+            <button id="btnLogOut" class="btn btn-primary hide">Log Out</button>
+        </div>
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
+
+        <!-- firebaseの設定を読み込み -->
+        <script src="../env/env_firebase_Auth/env.js"></script>
+        <script src="js//official_auth/firebase.js"></script>
+        <script src="js/official_auth/app.js"></script>
+    </body>
+</html>
