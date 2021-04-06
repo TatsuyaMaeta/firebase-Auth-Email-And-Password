@@ -66,3 +66,7 @@ button {
     border: 1px solid #5d8ffc;
     cursor: pointer;
 }
+
+#user_n{
+    display: none;
+}
