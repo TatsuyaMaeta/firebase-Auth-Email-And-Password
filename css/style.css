@@ -20,7 +20,7 @@ button {
 
 
 .loggedin-div {
-    width: 20%;
+    width: 80%;
     margin: 0px auto;
     margin-top: 150px;
     padding: 20px;
@@ -47,11 +47,13 @@ button {
 
 .main-div button,
 .loggedin-div button {
+    width: 180px;
     background: #5d8ffc;
     color: #fff;
     border: 1px solid #5d8ffc;
     border-radius: 5px;
-    padding: 15px;
+    padding: 10px;
+    margin-bottom: 10px;
     display: block;
     /* width: 100px; */
     transition: 0.3s;

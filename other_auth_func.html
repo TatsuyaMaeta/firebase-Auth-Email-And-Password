@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>test</title>
+        <title>other_auth_func</title>
 
         <link rel="stylesheet" href="./css/reset.css" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -22,7 +22,7 @@
     </head>
     <body>
         <br />
-        <span><a href="index.html" style="padding: 10px;"> 戻る</a></span>
+        <span><a href="index.html" style="padding: 10px"> 戻る</a></span>
         <br /><br /><br />
         <div id="login_div" class="main-div">
             <h3>Firebase Web login Example</h3>
@@ -33,7 +33,8 @@
                 id="password_field"
             />
 
-            <button onclick="login()">Login to Account</button>
+            <button onclick="login()">ログイン</button>
+            <button onclick="create_account()">新規アカウント作成</button>
         </div>
 
         <div id="user_div" class="loggedin-div">
@@ -42,8 +43,9 @@
                 Welcome to Firebase web login Example. You're currently logged
                 in.
             </p>
-            <div id="user_n" >g</div>
-            <button onclick="logout()">Logout</button>
+            <div id="user_n">g</div>
+            <button onclick="logout()">ログアウト</button>
+            <button id="verify_btn" onclick="send_verification()">確認メールを送る</button>
         </div>
 
         <!-- The core Firebase JS SDK is always required and must be listed first -->

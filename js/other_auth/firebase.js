@@ -22,9 +22,20 @@ firebase.auth().onAuthStateChanged(function (user) {
 
         if (user != null) {
             var email_id = user.email;
+            var email_verified = user.emailVerified;
+
+            if (email_verified) {
+                document.getElementById("verify_btn").style.display = "none";
+            } else {
+                document.getElementById("verify_btn").style.display = "block";
+            }
+
             document.getElementById("user_para").innerHTML =
-                "Welcome User : " + email_id;
-            
+                "ようこそ : " +
+                email_id +
+                " さん" +
+                "<br>Verified :" +
+                email_verified;
         }
     } else {
         // No user is signed in.
@@ -43,7 +54,24 @@ function login() {
         .signInWithEmailAndPassword(userEmail, userPass)
         .then(console.log(userEmail, userPass))
         .catch(function (error) {
+            var e = checkErrorDetail(error.code);
+            // console.log(e);
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // console.dir(error);
+            window.alert("エラー : " + e);
+        });
+}
 
+function create_account() {
+    var userEmail = document.getElementById("email_field").value;
+    var userPass = document.getElementById("password_field").value;
+
+    firebase
+        .auth()
+        .createUserWithEmailAndPassword(userEmail, userPass)
+        .then(console.log(userEmail, userPass))
+        .catch(function (error) {
             var e = checkErrorDetail(error.code);
             // console.log(e);
             var errorCode = error.code;
@@ -55,6 +83,32 @@ function login() {
 
 function logout() {
     firebase.auth().signOut();
+}
+
+function send_verification() {
+    // メールでのベリフィケーション実装 参照サイト
+    // https://www.youtube.com/watch?v=Vj96piq6WGk
+    // https://firebase.google.com/docs/auth/web/manage-users?hl=ja
+
+    //verificationの確認の際は検証アドレスがすぐ作れるこれで確認
+    // https://mails.tips/nada-getnada-com/
+    var user = firebase.auth().currentUser;
+
+    user.sendEmailVerification()
+        .then(function () {
+            // Email sent.
+
+            window.alert(
+                "確認メールを送りました。確認後再度ページを更新してください"
+            );
+        })
+        .catch(function (error) {
+            //create_accountのエラー処理と同じ
+            var e = checkErrorDetail(error.code);
+            console.log(e);
+            // console.dir(error);
+            window.alert("エラー : " + e);
+        });
 }
 
 document
